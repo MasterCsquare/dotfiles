@@ -78,7 +78,10 @@
 (use-package helm-ag :defer t)
 
 (use-package company
-  :config (add-hook 'after-init-hook 'global-company-mode))
+  :config
+  (add-hook 'after-init-hook 'global-company-mode)
+  (setq company-idle-delay 0)
+  (setq company-minimum-prefix-length 1))
 
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
@@ -104,7 +107,7 @@
    :bind ("C-=" . er/expand-region))
 
 (use-package magit
-  :bind ("C-x g" . magit-dispatch))
+  :bind ("C-x g" . magit))
 
 (use-package dashboard
   :config (dashboard-setup-startup-hook))
@@ -120,8 +123,17 @@
 (use-package sly :commands sly
   :config (setq inferior-lisp-program "/usr/bin/sbcl"))
 
+(use-package ace-window :commands ace-window)
+
 (define-prefix-command 'menu-key-map)
 (define-key menu-key-map (kbd "h") 'beginning-of-buffer)
 (define-key menu-key-map (kbd "n") 'end-of-buffer)
 (define-key menu-key-map (kbd "o") 'mode-line-other-buffer)
+(define-key menu-key-map (kbd "w") 'ace-window)
+(define-key menu-key-map (kbd "e") 'helm-find-files)
+(define-key menu-key-map (kbd "0") 'delete-window)
+(define-key menu-key-map (kbd "1") 'delete-other-windows)
+(define-key menu-key-map (kbd "2") 'split-window-below)
+(define-key menu-key-map (kbd "3") 'split-window-right)
+(define-key menu-key-map (kbd "<menu>") 'helm-M-x)
 (global-set-key (kbd "<menu>") 'menu-key-map)
