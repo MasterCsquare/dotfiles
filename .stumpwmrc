@@ -1,0 +1,5 @@
+(in-package :stumpwm)
+
+(set-prefix-key (kbd "C-i"))
+(define-key *root-map* (kbd "c") "exec kitty")
+(define-key *root-map* (kbd "b") "exec firefox")
