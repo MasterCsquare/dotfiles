@@ -16,6 +16,28 @@
 
 (setf *mouse-focus-policy* :click)
 
+(setf *colors*
+  '("#181E24"
+    "#D95468"
+    "#8BD49C"
+    "#EBBF83"
+    "#5EC4FF"
+    "#E27E8D"
+    "#70E1E8"
+    "#A0B3C5"))
+
+(defun my/update-color-map (screen)
+  "remove "
+  (labels ((map-colors (amt)
+             (loop for c in *colors*
+                   as color = (lookup-color screen c)
+                   do (adjust-color color amt)
+                   collect (alloc-color screen color))))
+    (setf (screen-color-map-normal screen) (apply #'vector (map-colors 0))
+          (screen-color-map-bright screen) (apply #'vector (map-colors 0)))))
+
+(my/update-color-map (current-screen))
+
 (setf *mode-line-background-color* "#1D252C")
 (setf *mode-line-foreground-color* "#5EC4FF")
 (mode-line)
