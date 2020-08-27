@@ -32,6 +32,8 @@
 (show-paren-mode 1)
 (setq show-paren-style 'parenthesis)
 
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
 (set-face-attribute 'default nil :font "DejaVu Sans Mono 11")
 (dolist (charset '(kana han symbol cjk-misc bopomofo))
   (set-fontset-font (frame-parameter nil 'font)
@@ -123,4 +125,3 @@
 (define-key menu-key-map (kbd "n") 'end-of-buffer)
 (define-key menu-key-map (kbd "o") 'mode-line-other-buffer)
 (global-set-key (kbd "<menu>") 'menu-key-map)
-
