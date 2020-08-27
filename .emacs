@@ -129,6 +129,7 @@
 (define-key menu-key-map (kbd "h") 'beginning-of-buffer)
 (define-key menu-key-map (kbd "n") 'end-of-buffer)
 (define-key menu-key-map (kbd "o") 'mode-line-other-buffer)
+(define-key menu-key-map (kbd "f") 'switch-to-buffer)
 (define-key menu-key-map (kbd "w") 'ace-window)
 (define-key menu-key-map (kbd "e") 'helm-find-files)
 (define-key menu-key-map (kbd "0") 'delete-window)
@@ -136,4 +137,5 @@
 (define-key menu-key-map (kbd "2") 'split-window-below)
 (define-key menu-key-map (kbd "3") 'split-window-right)
 (define-key menu-key-map (kbd "<menu>") 'helm-M-x)
+(define-key menu-key-map (kbd "SPC") 'magit)
 (global-set-key (kbd "<menu>") 'menu-key-map)
