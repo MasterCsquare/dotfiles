@@ -1,5 +1,23 @@
+;;; -*- mode: lisp -*-
+
 (in-package :stumpwm)
 
 (set-prefix-key (kbd "C-i"))
 (define-key *root-map* (kbd "c") "exec kitty")
-(define-key *root-map* (kbd "b") "exec firefox")
+
+(define-key *top-map* (kbd "F12")  "exec maim ~/$(date +%s).png")
+(define-key *top-map* (kbd "F11")  "exec maim -s ~/$(date +%s).png")
+
+(defcommand firefox () ()
+  "run or raise firefox"
+  (run-or-raise "firefox" '(:class "firefox")))
+
+(define-key *root-map* (kbd "b") "firefox")
+
+(setf *mouse-focus-policy* :click)
+
+(mode-line)
+
+(ql:quickload "clx-truetype")
+(load-module "ttf-fonts")
+(set-font (make-instance 'xft:font :family "WenQuanYi Zen Hei Mono" :subfamily "Regular" :size 11))
