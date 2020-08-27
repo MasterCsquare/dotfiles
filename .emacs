@@ -19,9 +19,25 @@
       scroll-conservatively 100000
       scroll-preserve-screen-position 1)
 
+(setq x-select-enable-clipboard t)
+
+(setq make-backup-files nil)
+(setq auto-save-default nil)
+
 (line-number-mode t)
 (column-number-mode t)
 (size-indication-mode t)
+
+(electric-pair-mode 1)
+(show-paren-mode 1)
+(setq show-paren-style 'parenthesis)
+
+(set-face-attribute 'default nil :font "DejaVu Sans Mono 11")
+(dolist (charset '(kana han symbol cjk-misc bopomofo))
+  (set-fontset-font (frame-parameter nil 'font)
+		    charset
+		    (font-spec :family "WenQuanYi Zen " :size 16)))
+
 (unless (package-installed-p 'use-package)
   (package-install 'use-package))
 
@@ -30,7 +46,6 @@
 (require 'use-package)
 (setq use-package-verbose t)
 (setq use-package-always-ensure t)
-(electric-pair-mode 1)
 
 (when (fboundp 'winner-mode)
   (winner-mode 1))
@@ -44,6 +59,9 @@
   :bind (("M-x" . helm-M-x)
 	 ("C-x C-f" . helm-find-files)))
 
+(use-package helm-swoop
+  :bind ("C-s" . helm-swoop))
+
 (use-package doom-themes
   :config (load-theme 'doom-city-lights t))
 
@@ -51,6 +69,11 @@
   :config
   (projectile-mode +1)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
+
+(use-package helm-projectile
+  :config (helm-projectile-on))
+
+(use-package helm-ag :defer t)
 
 (use-package company
   :config (add-hook 'after-init-hook 'global-company-mode))
@@ -62,7 +85,6 @@
   :bind (("C-h f" . helpful-callable)
 	 ("C-h v" . helpful-variable)
 	 ("C-h k" . helpful-key)))
-
 
 (use-package multiple-cursors
   :bind (("C->" . mc/mark-next-like-this)
@@ -82,7 +104,23 @@
 (use-package magit
   :bind ("C-x g" . magit-dispatch))
 
+(use-package dashboard
+  :config (dashboard-setup-startup-hook))
+
+(use-package rainbow-mode :commands rainbow-mode)
+
+(use-package undo-tree
+  :config (global-undo-tree-mode))
+
+(use-package diff-hl
+  :config (global-diff-hl-mode))
+
+(use-package sly :commands sly
+  :config (setq inferior-lisp-program "/usr/bin/sbcl"))
+
 (define-prefix-command 'menu-key-map)
 (define-key menu-key-map (kbd "h") 'beginning-of-buffer)
 (define-key menu-key-map (kbd "n") 'end-of-buffer)
+(define-key menu-key-map (kbd "o") 'mode-line-other-buffer)
 (global-set-key (kbd "<menu>") 'menu-key-map)
+
