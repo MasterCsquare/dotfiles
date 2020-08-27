@@ -8,14 +8,16 @@
 (define-key *top-map* (kbd "F12")  "exec maim ~/$(date +%s).png")
 (define-key *top-map* (kbd "F11")  "exec maim -s ~/$(date +%s).png")
 
-(defcommand firefox () ()
-  "run or raise firefox"
-  (run-or-raise "firefox" '(:class "firefox")))
+(defcommand chromium () ()
+  "run or raise chromium with proxy"
+  (run-or-raise "chromium --proxy-server=socks5://localhost:1080" '(:class "Chromium")))
 
-(define-key *root-map* (kbd "b") "firefox")
+(define-key *root-map* (kbd "b") "chromium")
 
 (setf *mouse-focus-policy* :click)
 
+(setf *mode-line-background-color* "#1D252C")
+(setf *mode-line-foreground-color* "#5EC4FF")
 (mode-line)
 
 (ql:quickload "clx-truetype")
