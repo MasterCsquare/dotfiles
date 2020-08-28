@@ -14,6 +14,12 @@
 
 (define-key *root-map* (kbd "b") "chromium")
 
+(defcommand telegram () ()
+  "run or raise telegram"
+  (run-or-raise "telegram-desktop" '(:class "TelegramDesktop")))
+
+(define-key *root-map* (kbd "t") "telegram")
+
 (setf *mouse-focus-policy* :click)
 
 (setf *colors*
