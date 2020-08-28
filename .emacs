@@ -126,11 +126,15 @@
 
 (use-package ace-window :commands ace-window)
 
+(use-package info+)
+
 (define-prefix-command 'menu-key-map)
 (define-key menu-key-map (kbd "h") 'beginning-of-buffer)
 (define-key menu-key-map (kbd "n") 'end-of-buffer)
 (define-key menu-key-map (kbd "o") 'mode-line-other-buffer)
 (define-key menu-key-map (kbd "f") 'switch-to-buffer)
+(define-key menu-key-map (kbd ";") 'save-buffer)
+(define-key menu-key-map (kbd "k") 'kill-buffer)
 (define-key menu-key-map (kbd "w") 'ace-window)
 (define-key menu-key-map (kbd "e") 'helm-find-files)
 (define-key menu-key-map (kbd "0") 'delete-window)
