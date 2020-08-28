@@ -35,7 +35,7 @@
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-(set-face-attribute 'default nil :font "DejaVu Sans Mono 11")
+(set-face-attribute 'default nil :font "Inconsolata 13")
 (dolist (charset '(kana han symbol cjk-misc bopomofo))
   (set-fontset-font (frame-parameter nil 'font)
 		    charset
