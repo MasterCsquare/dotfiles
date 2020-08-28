@@ -1,8 +1,9 @@
-(add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/") t)
+(setq package-archives
+      '(("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
+        ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
+        ("emacswiki" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/emacswiki/")))
 
 (package-initialize)
-(require 'package)
 (unless package-archive-contents
   (package-refresh-contents))
 
@@ -138,4 +139,5 @@
 (define-key menu-key-map (kbd "3") 'split-window-right)
 (define-key menu-key-map (kbd "<menu>") 'helm-M-x)
 (define-key menu-key-map (kbd "SPC") 'magit)
+(define-key menu-key-map (kbd "p") 'projectile-command-map)
 (global-set-key (kbd "<menu>") 'menu-key-map)
