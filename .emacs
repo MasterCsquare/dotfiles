@@ -128,6 +128,8 @@
 
 (use-package info+)
 
+(use-package mingus :commands mingus)
+
 (define-prefix-command 'menu-key-map)
 (define-key menu-key-map (kbd "h") 'beginning-of-buffer)
 (define-key menu-key-map (kbd "n") 'end-of-buffer)
@@ -135,6 +137,7 @@
 (define-key menu-key-map (kbd "f") 'switch-to-buffer)
 (define-key menu-key-map (kbd ";") 'save-buffer)
 (define-key menu-key-map (kbd "k") 'kill-buffer)
+(define-key menu-key-map (kbd "b") 'mark-whole-buffer)
 (define-key menu-key-map (kbd "w") 'ace-window)
 (define-key menu-key-map (kbd "e") 'helm-find-files)
 (define-key menu-key-map (kbd "0") 'delete-window)
