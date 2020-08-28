@@ -7,6 +7,8 @@
 
 (define-key *top-map* (kbd "F12")  "exec maim ~/$(date +%s).png")
 (define-key *top-map* (kbd "F11")  "exec maim -s ~/$(date +%s).png")
+(define-key *top-map* (kbd "F10")  "exec amixer set Master 2%+")
+(define-key *top-map* (kbd "F9")  "exec amixer set Master 2%-")
 
 (defcommand chromium () ()
   "run or raise chromium with proxy"
