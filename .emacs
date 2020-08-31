@@ -68,6 +68,9 @@
 (use-package doom-themes
   :config (load-theme 'doom-city-lights t))
 
+(use-package doom-modeline
+  :init (doom-modeline-mode 1))
+
 (use-package projectile
   :config
   (projectile-mode +1)
@@ -84,6 +87,11 @@
   (setq company-idle-delay 0)
   (setq company-minimum-prefix-length 1))
 
+(use-package eglot :commands eglot)
+
+(use-package flycheck
+  :config (add-hook 'after-init-hook #'global-flycheck-mode))
+
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
 
@@ -91,6 +99,8 @@
   :bind (("C-h f" . helpful-callable)
 	 ("C-h v" . helpful-variable)
 	 ("C-h k" . helpful-key)))
+
+(use-package hydra)
 
 (use-package multiple-cursors
   :bind (("C->" . mc/mark-next-like-this)
@@ -110,6 +120,15 @@
 (use-package magit
   :bind ("C-x g" . magit))
 
+(use-package forge
+  :after magit)
+
+(use-package git-timemachine
+  :commands git-timemachine)
+
+(use-package git-messenger
+  :commands git-messenger:popup-message)
+
 (use-package dashboard
   :config (dashboard-setup-startup-hook))
 
@@ -121,10 +140,41 @@
 (use-package diff-hl
   :config (global-diff-hl-mode))
 
+(use-package eyebrowse
+  :config (eyebrowse-mode t))
+
 (use-package sly :commands sly
   :config (setq inferior-lisp-program "/usr/bin/sbcl"))
 
+(use-package geiser :commands geiser)
+
 (use-package ace-window :commands ace-window)
+
+(use-package avy :commands avy-goto-char-timer)
+
+(use-package ace-link :config (ace-link-setup-default))
+
+(use-package volatile-highlights
+  :config (volatile-highlights-mode t))
+
+(use-package move-text
+  :bind
+  (("M-p" . move-text-up)
+   ("M-n" . move-text-down)))
+
+(use-package web-mode :mode "\\.html\\'")
+
+(use-package emmet-mode :hook (web-mode . emmet-mode))
+
+(use-package haskell-mode :mode "\\.hs\\'")
+
+(use-package go-mode :mode "\\.go\\'")
+
+(use-package rust-mode :mode "\\.rs\\'")
+
+(use-package lua-mode :mode "\\.lua\\'")
+
+(use-package dired+)
 
 (use-package info+)
 
@@ -146,6 +196,7 @@
 (define-key menu-key-map (kbd "3") 'split-window-right)
 (define-key menu-key-map (kbd "[") 'winner-undo)
 (define-key menu-key-map (kbd "]") 'winner-redo)
+(define-key menu-key-map (kbd "j") 'avy-goto-char-timer)
 (define-key menu-key-map (kbd "<menu>") 'helm-M-x)
 (define-key menu-key-map (kbd "SPC") 'magit)
 (define-key menu-key-map (kbd "p") 'projectile-command-map)
