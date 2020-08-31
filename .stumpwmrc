@@ -48,7 +48,7 @@
 
 (setf *mode-line-background-color* "#1D252C")
 (setf *mode-line-foreground-color* "#5EC4FF")
-(setf *screen-mode-line-format* "^2|%n| ^3%d ^4%v")
+(setf *screen-mode-line-format* "^3|%n| ^2%d ^4%W")
 (mode-line)
 
 (ql:quickload "clx-truetype")
