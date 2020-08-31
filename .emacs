@@ -90,7 +90,7 @@
 (use-package eglot :commands eglot)
 
 (use-package flycheck
-  :config (add-hook 'after-init-hook #'global-flycheck-mode))
+  :hook (after-init . global-flycheck-mode))
 
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
@@ -101,6 +101,8 @@
 	 ("C-h k" . helpful-key)))
 
 (use-package hydra)
+
+(use-package god-mode :bind ("<escape>" . god-loccal-mode))
 
 (use-package multiple-cursors
   :bind (("C->" . mc/mark-next-like-this)
@@ -166,6 +168,11 @@
 
 (use-package emmet-mode :hook (web-mode . emmet-mode))
 
+(use-package skewer-mode :commands run-skewer
+  :hook ((js2-mode . skewer-mode)
+	 (css-mode . skewer-css-mode )
+	 (html-mode . skewer-html-mode)))
+
 (use-package haskell-mode :mode "\\.hs\\'")
 
 (use-package go-mode :mode "\\.go\\'")
@@ -173,6 +180,14 @@
 (use-package rust-mode :mode "\\.rs\\'")
 
 (use-package lua-mode :mode "\\.lua\\'")
+
+(use-package json-mode :mode "\\.json\\'")
+
+(use-package markdown-mode :mode "\\.md\\'")
+
+(use-package org-bullets
+  :config (setq org-bullets-bullet-list '("λ" "μ" "ν" "ξ" ))
+  :hook (org-mode . (lambda () (org-bullets-mode 1))))
 
 (use-package dired+)
 
