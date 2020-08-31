@@ -35,7 +35,7 @@
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-(set-face-attribute 'default nil :font "Inconsolata 13")
+(set-face-attribute 'default nil :font "Dejavu Sans Mono 11")
 (dolist (charset '(kana han symbol cjk-misc bopomofo))
   (set-fontset-font (frame-parameter nil 'font)
 		    charset
@@ -144,6 +144,8 @@
 (define-key menu-key-map (kbd "1") 'delete-other-windows)
 (define-key menu-key-map (kbd "2") 'split-window-below)
 (define-key menu-key-map (kbd "3") 'split-window-right)
+(define-key menu-key-map (kbd "[") 'winner-undo)
+(define-key menu-key-map (kbd "]") 'winner-redo)
 (define-key menu-key-map (kbd "<menu>") 'helm-M-x)
 (define-key menu-key-map (kbd "SPC") 'magit)
 (define-key menu-key-map (kbd "p") 'projectile-command-map)
