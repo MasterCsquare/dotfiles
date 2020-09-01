@@ -7,6 +7,7 @@
 
 (define-key *top-map* (kbd "F12")  "exec maim ~/$(date +%s).png")
 (define-key *top-map* (kbd "F11")  "exec maim -s ~/$(date +%s).png")
+
 (define-key *top-map* (kbd "F10")  "exec amixer set Master 2%+")
 (define-key *top-map* (kbd "F9")  "exec amixer set Master 2%-")
 
@@ -49,7 +50,14 @@
 (setf *mode-line-background-color* "#1D252C")
 (setf *mode-line-foreground-color* "#5EC4FF")
 (setf *mode-line-timeout* 1)
-(setf *screen-mode-line-format* "^3|%n| ^2%d ^4%W")
+
+(load-module "mpd")
+(define-key *top-map* (kbd "s-\\")  "mpd-connect")
+(define-key *top-map* (kbd "s-]")  "mpd-next")
+(define-key *top-map* (kbd "s-[")  "mpd-prev")
+(define-key *top-map* (kbd "s-p")  "mpd-toggle-pause")
+
+(setf *screen-mode-line-format* "^3|%n| ^2%d ^5%m ^4%W")
 (mode-line)
 
 (ql:quickload "clx-truetype")
