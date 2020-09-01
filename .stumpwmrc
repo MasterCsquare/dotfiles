@@ -60,6 +60,7 @@
 (gnewbg "vice")
 (gnewbg "misc")
 
+(run-shell-command "feh --bg-scale -z ~/wallpapers")
 (run-with-timer
  600 600
  #'(lambda ()
