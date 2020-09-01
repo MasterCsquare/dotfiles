@@ -25,9 +25,15 @@
 (setq make-backup-files nil)
 (setq auto-save-default nil)
 
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+
+(setq x-stretch-cursor t)
+
 (line-number-mode t)
 (column-number-mode t)
 (size-indication-mode t)
+
+(delete-selection-mode 1)
 
 (electric-pair-mode 1)
 (show-paren-mode 1)
@@ -35,7 +41,10 @@
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-(set-face-attribute 'default nil :font "Dejavu Sans Mono 11")
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
+
+(set-face-attribute 'default nil :font "Fira Code 11")
 (dolist (charset '(kana han symbol cjk-misc bopomofo))
   (set-fontset-font (frame-parameter nil 'font)
 		    charset
@@ -66,7 +75,9 @@
   :bind ("C-s" . helm-swoop))
 
 (use-package doom-themes
-  :config (load-theme 'doom-city-lights t))
+  :config
+  (load-theme 'doom-city-lights t)
+  (doom-themes-org-config))
 
 (use-package doom-modeline
   :init (doom-modeline-mode 1))
