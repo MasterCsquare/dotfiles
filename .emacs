@@ -209,6 +209,10 @@
 
 (use-package mingus :commands mingus)
 
+(use-package rime
+  :custom
+  (default-input-method "rime"))
+
 (define-prefix-command 'menu-key-map)
 (define-key menu-key-map (kbd "h") 'beginning-of-buffer)
 (define-key menu-key-map (kbd "n") 'end-of-buffer)
