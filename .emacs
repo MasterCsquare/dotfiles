@@ -41,6 +41,9 @@
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
+(add-hook 'java-mode-hook 'subword-mode)
+(add-hook 'go-mode-hook 'subword-mode)
+
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 
