@@ -35,6 +35,9 @@
 (add-hook 'java-mode-hook 'subword-mode)
 (add-hook 'go-mode-hook 'subword-mode)
 
+(add-hook 'text-mode-hook 'flyspell-mode)
+(add-hook 'prog-mode-hook 'flyspell-prog-mode)
+
 (fset 'yes-or-no-p 'y-or-n-p)
 
 (put 'downcase-region 'disabled nil)
