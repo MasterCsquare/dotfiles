@@ -1,12 +1,3 @@
-(setq package-archives
-      '(("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
-        ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
-        ("emacswiki" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/emacswiki/")))
-
-(package-initialize)
-(unless package-archive-contents
-  (package-refresh-contents))
-
 (setq gc-cons-threshold 100000000)
 
 (tool-bar-mode -1)
@@ -44,8 +35,13 @@
 (add-hook 'java-mode-hook 'subword-mode)
 (add-hook 'go-mode-hook 'subword-mode)
 
+(fset 'yes-or-no-p 'y-or-n-p)
+
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
+
+(when (fboundp 'winner-mode)
+  (winner-mode 1))
 
 (set-face-attribute 'default nil :font "Fira Code 11")
 (dolist (charset '(kana han symbol cjk-misc bopomofo))
@@ -53,17 +49,22 @@
 		    charset
 		    (font-spec :family "WenQuanYi Zen " :size 16)))
 
+(setq package-archives
+      '(("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
+        ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
+        ("emacswiki" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/emacswiki/")))
+
+(package-initialize)
+
+(unless package-archive-contents
+  (package-refresh-contents))
+
 (unless (package-installed-p 'use-package)
   (package-install 'use-package))
-
-(fset 'yes-or-no-p 'y-or-n-p)
 
 (require 'use-package)
 (setq use-package-verbose t)
 (setq use-package-always-ensure t)
-
-(when (fboundp 'winner-mode)
-  (winner-mode 1))
 
 (use-package helm
   :config
@@ -114,6 +115,14 @@
 	 ("C-h v" . helpful-variable)
 	 ("C-h k" . helpful-key)))
 
+(use-package which-key
+  :config (which-key-mode))
+
+(use-package lispy
+  :hook
+  (emacs-lisp-mode . lispy-mode)
+  (lisp-mode . lispy-mode))
+
 (use-package hydra)
 
 (use-package god-mode :bind ("<escape>" . god-loccal-mode))
@@ -121,14 +130,6 @@
 (use-package multiple-cursors
   :bind (("C->" . mc/mark-next-like-this)
 	 ("C-<" . mc/mark-previous-like-this)))
-
-(use-package lispy
-  :hook
-  (emacs-lisp-mode . lispy-mode)
-  (lisp-mode . lispy-mode))
-
-(use-package which-key
-  :config (which-key-mode))
 
 (use-package expand-region
    :bind ("C-=" . er/expand-region))
