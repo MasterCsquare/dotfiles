@@ -48,9 +48,19 @@
 
 (setf *mode-line-background-color* "#1D252C")
 (setf *mode-line-foreground-color* "#5EC4FF")
+(setf *mode-line-timeout* 1)
 (setf *screen-mode-line-format* "^3|%n| ^2%d ^4%W")
 (mode-line)
 
 (ql:quickload "clx-truetype")
 (load-module "ttf-fonts")
 (set-font (make-instance 'xft:font :family "WenQuanYi Zen Hei Mono" :subfamily "Regular" :size 11))
+
+(grename "main")
+(gnewbg "vice")
+(gnewbg "misc")
+
+(run-with-timer
+ 600 600
+ #'(lambda ()
+     (run-shell-command "feh --bg-scale -z ~/wallpapers")))
