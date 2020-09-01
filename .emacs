@@ -73,7 +73,8 @@
   (setq helm-autoresize-max-height 35)
   (helm-autoresize-mode)
   :bind (("M-x" . helm-M-x)
-	 ("C-x C-f" . helm-find-files)))
+	 ("C-x C-f" . helm-find-files)
+	 ("C-x r b" . helm-filtered-bookmarks)))
 
 (use-package helm-swoop
   :bind ("C-s" . helm-swoop))
@@ -230,6 +231,7 @@
 (define-key menu-key-map (kbd "3") 'split-window-right)
 (define-key menu-key-map (kbd "[") 'winner-undo)
 (define-key menu-key-map (kbd "]") 'winner-redo)
+(define-key menu-key-map (kbd "m") 'helm-filtered-bookmarks)
 (define-key menu-key-map (kbd "j") 'avy-goto-char-timer)
 (define-key menu-key-map (kbd "<menu>") 'helm-M-x)
 (define-key menu-key-map (kbd "SPC") 'magit)
