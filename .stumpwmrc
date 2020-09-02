@@ -56,7 +56,7 @@
 (define-key *top-map* (kbd "s-]")  "mpd-next")
 (define-key *top-map* (kbd "s-[")  "mpd-prev")
 (define-key *top-map* (kbd "s-p")  "mpd-toggle-pause")
-(setf mpd:*mpd-modeline-fmt* "[%s;%r;%F]: %t")
+(setf mpd:*mpd-modeline-fmt* "[%s;%r;%F]: %n/%p %t %e/%l")
 
 (setf *screen-mode-line-format* "^3|%n| ^2%d ^5%m ^4%W")
 (mode-line)
