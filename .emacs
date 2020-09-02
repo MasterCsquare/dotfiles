@@ -106,6 +106,13 @@
   (setq company-idle-delay 0)
   (setq company-minimum-prefix-length 1))
 
+(use-package yasnippet
+  :hook
+  (after-init . yas-global-mode))
+
+(use-package yasnippet-snippets
+  :after yasnippet)
+
 (use-package eglot :commands eglot)
 
 (use-package flycheck
