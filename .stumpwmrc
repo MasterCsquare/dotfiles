@@ -26,14 +26,14 @@
 (setf *mouse-focus-policy* :click)
 
 (setf *colors*
-  '("#181E24"
-    "#D95468"
-    "#8BD49C"
-    "#EBBF83"
-    "#5EC4FF"
-    "#E27E8D"
-    "#70E1E8"
-    "#A0B3C5"))
+  '("#0a0e14"
+    "#f07178"
+    "#c2d94c"
+    "#ffee99"
+    "#39bae6"
+    "#ff8f40"
+    "#95e6cb"
+    "#b3b1ad"))
 
 (defun my/update-color-map (screen)
   "remove "
@@ -47,8 +47,8 @@
 
 (my/update-color-map (current-screen))
 
-(setf *mode-line-background-color* "#1D252C")
-(setf *mode-line-foreground-color* "#5EC4FF")
+(setf *mode-line-background-color* "#0a0e14")
+(setf *mode-line-foreground-color* "#39bae6")
 (setf *mode-line-timeout* 1)
 
 (load-module "mpd")
