@@ -113,6 +113,10 @@
 (use-package yasnippet-snippets
   :after yasnippet)
 
+(use-package auto-yasnippet
+  :bind (("C-c [" . aya-create)
+	 ("C-c ]" . aya-expand)))
+
 (use-package eglot :commands eglot)
 
 (use-package flycheck
