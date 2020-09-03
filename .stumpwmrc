@@ -74,3 +74,13 @@
  600 600
  #'(lambda ()
      (run-shell-command "feh --bg-scale -z ~/wallpapers")))
+
+(run-with-timer
+ 900 900
+ (lambda ()
+   (loop for font in (stumpwm::screen-fonts (current-screen))
+         when (typep font 'xft:font)
+           do (clrhash (xft::font-string-line-bboxes font))
+              (clrhash (xft::font-string-line-alpha-maps font))
+              (clrhash (xft::font-string-bboxes font))
+              (clrhash (xft::font-string-alpha-maps font)))))
