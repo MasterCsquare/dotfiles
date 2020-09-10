@@ -92,7 +92,7 @@
 (add-hook *mode-line-click-hook*
 	  (lambda (mode-line button x y)
 	    (case button
-	      (4 (gnext))
-	      (5 (gprev))
+	      (4 (gprev))
+	      (5 (gnext))
 	      (1 (pull-hidden-previous))
 	      (3 (pull-hidden-next)))))
