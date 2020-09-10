@@ -84,3 +84,15 @@
               (clrhash (xft::font-string-line-alpha-maps font))
               (clrhash (xft::font-string-bboxes font))
               (clrhash (xft::font-string-alpha-maps font)))))
+
+;; button 4 - wheel up
+;; button 5 - wheel down
+;; button 1 - left click
+;; button 3 - right click
+(add-hook *mode-line-click-hook*
+	  (lambda (mode-line button x y)
+	    (case button
+	      (4 (gnext))
+	      (5 (gprev))
+	      (1 (pull-hidden-previous))
+	      (3 (pull-hidden-next)))))
