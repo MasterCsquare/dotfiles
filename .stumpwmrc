@@ -94,5 +94,5 @@
 	    (case button
 	      (4 (gprev))
 	      (5 (gnext))
-	      (1 (pull-hidden-previous))
-	      (3 (pull-hidden-next)))))
+	      (1 (pull-hidden-next))
+	      (3 (pull-hidden-previous)))))
