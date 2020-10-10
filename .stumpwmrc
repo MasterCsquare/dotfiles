@@ -23,6 +23,13 @@
 
 (define-key *root-map* (kbd "t") "telegram")
 
+(defcommand ydcv () ()
+  "translate English to Chinese"
+  (run-shell-command
+   (concatenate 'string "ydcv "
+		(read-one-line (current-screen) "word: ")) t))
+(define-key *root-map* (kbd "q") "ydcv")
+
 (setf *mouse-focus-policy* :click)
 
 (setf *colors*
