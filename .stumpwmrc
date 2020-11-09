@@ -12,19 +12,19 @@
 (define-key *top-map* (kbd "s-Page_Down")  "exec amixer set Master 2%-")
 
 (defcommand chromium () ()
-  "run or raise chromium with proxy"
+  "run or raise chromium with proxy."
   (run-or-raise "chromium --proxy-server=socks5://localhost:1080" '(:class "Chromium")))
 
 (define-key *root-map* (kbd "b") "chromium")
 
 (defcommand telegram () ()
-  "run or raise telegram"
+  "run or raise telegram."
   (run-or-raise "telegram-desktop" '(:class "TelegramDesktop")))
 
 (define-key *root-map* (kbd "t") "telegram")
 
 (defcommand ydcv () ()
-  "translate English to Chinese"
+  "translate English to Chinese."
   (run-shell-command
    (concatenate 'string "ydcv "
 		(read-one-line (current-screen) "word: ")) t))
@@ -43,7 +43,7 @@
     "#b3b1ad"))
 
 (defun my/update-color-map (screen)
-  "remove "
+  "remove color adjust."
   (labels ((map-colors (amt)
              (loop for c in *colors*
                    as color = (lookup-color screen c)
