@@ -8,8 +8,11 @@
 (define-key *top-map* (kbd "Print")  "exec maim ~/$(date +%s).png")
 (define-key *top-map* (kbd "s-Print")  "exec maim -s ~/$(date +%s).png")
 
-(define-key *top-map* (kbd "s-Page_Up")  "exec amixer set Master 2%+")
-(define-key *top-map* (kbd "s-Page_Down")  "exec amixer set Master 2%-")
+(define-key *top-map* (kbd "s-Page_Up")  "exec amixer set Master 3%+")
+(define-key *top-map* (kbd "s-Page_Down")  "exec amixer set Master 3%-")
+
+(define-key *top-map* (kbd "XF86AudioRaiseVolume")  "exec amixer set Master 3%+")
+(define-key *top-map* (kbd "XF86AudioLowerVolume")  "exec amixer set Master 3%-")
 
 (defcommand chromium () ()
   "run or raise chromium with proxy."
