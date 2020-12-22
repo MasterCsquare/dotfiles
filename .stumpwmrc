@@ -80,7 +80,7 @@
 
 (ql:quickload "clx-truetype")
 (load-module "ttf-fonts")
-(set-font (make-instance 'xft:font :family "WenQuanYi Zen Hei Mono" :subfamily "Regular" :size 11))
+(set-font (make-instance 'xft:font :family "WenQuanYi Zen Hei Mono" :subfamily "Regular" :size 13))
 
 (grename "main")
 (gnewbg "vice")
