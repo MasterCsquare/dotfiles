@@ -27,6 +27,12 @@
 
 (define-key *root-map* (kbd "t") "telegram")
 
+(defcommand run-and-echo () ()
+  "run command and echo the results."
+  (run-shell-command (read-one-line (current-screen) "command: ") t))
+
+(define-key *top-map* (kbd "s-r") "run-and-echo")
+
 (defun ydcv (word)
   "translate word to chinese by ydcv."
   (run-shell-command
