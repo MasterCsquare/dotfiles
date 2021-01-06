@@ -17,7 +17,7 @@
 
 (defcommand firefox () ()
   "run or raise firefox"
-  (run-or-raise "firefox-bin" '(:class "Firefox")))
+  (run-or-raise "firefox" '(:class "Firefox")))
 
 (define-key *root-map* (kbd "b") "firefox")
 
