@@ -17,7 +17,7 @@ grey = "#384551"
 
 main = do
     xmproc <- spawnPipe "xmobar"
-    xmonad $ ewmh $docks def
+    xmonad $ ewmh $ docks def
         { handleEventHook = handleEventHook def <+> fullscreenEventHook
         , layoutHook = avoidStruts $ smartBorders $ layoutHook def
         , logHook = dynamicLogWithPP xmobarPP
@@ -41,4 +41,5 @@ main = do
         , ("M-i", runOrRaise "emacs" (className =? "Emacs"))
         , ("M-f", runOrRaise "firefox" (className =? "firefox"))
         , ("M-s", scratchpadSpawnActionCustom "kitty --name=scratchpad")
+        , ("M-b", sendMessage ToggleStruts)
         ]
