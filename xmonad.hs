@@ -4,6 +4,7 @@ import XMonad.Actions.WindowGo
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
+import XMonad.Layout.NoBorders (smartBorders)
 import XMonad.Util.EZConfig(additionalKeysP)
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.Scratchpad
@@ -18,7 +19,7 @@ main = do
     xmproc <- spawnPipe "xmobar"
     xmonad $ ewmh $docks def
         { handleEventHook = handleEventHook def <+> fullscreenEventHook
-        , layoutHook = avoidStruts $ layoutHook def
+        , layoutHook = avoidStruts $ smartBorders $ layoutHook def
         , logHook = dynamicLogWithPP xmobarPP
                         { ppOutput = hPutStrLn xmproc
                         , ppTitle = xmobarColor blue "" . shorten 80
