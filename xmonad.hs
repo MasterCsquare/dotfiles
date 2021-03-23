@@ -8,12 +8,31 @@ import XMonad.Layout.NoBorders (smartBorders)
 import XMonad.Util.EZConfig(additionalKeysP)
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.Scratchpad
+
+import Control.Monad
+import Data.Maybe(maybeToList)
 import System.IO
 
 yellow = "#ebbf83"
 red = "#d95468"
 blue = "#55ccff"
 grey = "#384551"
+
+addNETSupported :: Atom -> X ()
+addNETSupported x   = withDisplay $ \dpy -> do
+    r               <- asks theRoot
+    a_NET_SUPPORTED <- getAtom "_NET_SUPPORTED"
+    a               <- getAtom "ATOM"
+    liftIO $ do
+       sup <- (join . maybeToList) <$> getWindowProperty32 dpy a_NET_SUPPORTED r
+       when (fromIntegral x `notElem` sup) $
+         changeProperty32 dpy r a_NET_SUPPORTED a propModeAppend [fromIntegral x]
+
+addEWMHFullscreen :: X ()
+addEWMHFullscreen   = do
+    wms <- getAtom "_NET_WM_STATE"
+    wfs <- getAtom "_NET_WM_STATE_FULLSCREEN"
+    mapM_ addNETSupported [wms, wfs]
 
 main = do
     xmproc <- spawnPipe "xmobar"
@@ -27,6 +46,7 @@ main = do
                         , ppUrgent  = xmobarColor red yellow
                         }
         , manageHook = manageHook def <+> scratchpadManageHookDefault
+        , startupHook  = addEWMHFullscreen
         , modMask = mod4Mask
         , normalBorderColor  = grey
         , focusedBorderColor = red
