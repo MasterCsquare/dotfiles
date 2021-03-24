@@ -61,6 +61,12 @@ myXPConfig = def
              , searchPredicate = isInfixOf
              }
 
+myGSconfig = def
+             { gs_font = myFont
+             , gs_cellwidth = 200
+             , gs_cellheight = 40
+             }
+
 main = do
     xmproc <- spawnPipe "xmobar"
     xmonad $ ewmh $ docks def
@@ -84,7 +90,7 @@ main = do
         , ("M-<Page_Up>", spawn "amixer set Master 3%+")
         , ("M-<Page_Down>", spawn "amixer set Master 3%-")
         , ("M-p", shellPrompt myXPConfig)
-        , ("M-g", goToSelected def)
+        , ("M-g", goToSelected myGSconfig)
         , ("M-i", runOrRaise "emacs" (className =? "Emacs"))
         , ("M-f", runOrRaise "firefox" (className =? "firefox"))
         , ("M-s", scratchpadSpawnActionCustom "kitty --name=scratchpad")
