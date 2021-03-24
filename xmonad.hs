@@ -1,4 +1,5 @@
 import XMonad
+import qualified XMonad.StackSet as W
 import XMonad.Actions.GridSelect
 import XMonad.Actions.WindowGo
 import XMonad.Hooks.DynamicLog
@@ -62,4 +63,7 @@ main = do
         , ("M-f", runOrRaise "firefox" (className =? "firefox"))
         , ("M-s", scratchpadSpawnActionCustom "kitty --name=scratchpad")
         , ("M-b", sendMessage ToggleStruts)
+        , ("M-c", kill)
+        , ("M-<Return>", spawn "kitty")
+        , ("M-S-<Return>", windows W.swapMaster)
         ]
