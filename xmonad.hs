@@ -5,6 +5,7 @@ import XMonad.Actions.WindowGo
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
+import XMonad.Layout.Hidden
 import XMonad.Layout.NoBorders (smartBorders)
 import XMonad.Util.EZConfig(additionalKeysP)
 import XMonad.Util.Run(spawnPipe)
@@ -39,7 +40,7 @@ main = do
     xmproc <- spawnPipe "xmobar"
     xmonad $ ewmh $ docks def
         { handleEventHook = handleEventHook def <+> fullscreenEventHook
-        , layoutHook = avoidStruts $ smartBorders $ layoutHook def
+        , layoutHook = avoidStruts $ smartBorders $ hiddenWindows $ layoutHook def
         , logHook = dynamicLogWithPP xmobarPP
                         { ppOutput = hPutStrLn xmproc
                         , ppTitle = xmobarColor blue "" . shorten 80
@@ -66,4 +67,6 @@ main = do
         , ("M-c", kill)
         , ("M-<Return>", spawn "kitty")
         , ("M-S-<Return>", windows W.swapMaster)
+        , ("M-d", withFocused hideWindow)
+        , ("M-a", popOldestHiddenWindow)
         ]
