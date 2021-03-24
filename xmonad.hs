@@ -1,24 +1,36 @@
 import XMonad
 import qualified XMonad.StackSet as W
+
 import XMonad.Actions.GridSelect
 import XMonad.Actions.WindowGo
+
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
+
 import XMonad.Layout.Hidden
-import XMonad.Layout.NoBorders (smartBorders)
-import XMonad.Util.EZConfig(additionalKeysP)
-import XMonad.Util.Run(spawnPipe)
+import XMonad.Layout.NoBorders
+
+import XMonad.Prompt
+import XMonad.Prompt.Shell
+
+import XMonad.Util.EZConfig
+import XMonad.Util.Run
 import XMonad.Util.Scratchpad
 
 import Control.Monad
-import Data.Maybe(maybeToList)
+import Data.Maybe
+import Data.List
 import System.IO
 
 yellow = "#ebbf83"
 red = "#d95468"
 blue = "#55ccff"
 grey = "#384551"
+black = "#0a0e14"
+white = "#b3b1ad"
+
+myFont = "xft:Dejavu Sans Mono:size=11"
 
 addNETSupported :: Atom -> X ()
 addNETSupported x   = withDisplay $ \dpy -> do
@@ -35,6 +47,19 @@ addEWMHFullscreen   = do
     wms <- getAtom "_NET_WM_STATE"
     wfs <- getAtom "_NET_WM_STATE_FULLSCREEN"
     mapM_ addNETSupported [wms, wfs]
+
+myXPConfig = def
+             { position = Top
+             , bgColor = black
+             , fgColor = white
+             , bgHLight = blue
+             , promptBorderWidth = 0
+             , defaultText = ""
+             , alwaysHighlight = True
+             , height = 32
+             , font = myFont
+             , searchPredicate = isInfixOf
+             }
 
 main = do
     xmproc <- spawnPipe "xmobar"
@@ -58,7 +83,7 @@ main = do
         , ("<Print>", spawn "maim ~/$(date +%s).png")
         , ("M-<Page_Up>", spawn "amixer set Master 3%+")
         , ("M-<Page_Down>", spawn "amixer set Master 3%-")
-        , ("M-p", spawn "rofi -show run")
+        , ("M-p", shellPrompt myXPConfig)
         , ("M-g", goToSelected def)
         , ("M-i", runOrRaise "emacs" (className =? "Emacs"))
         , ("M-f", runOrRaise "firefox" (className =? "firefox"))
