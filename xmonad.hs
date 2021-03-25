@@ -10,6 +10,7 @@ import XMonad.Hooks.ManageDocks
 
 import XMonad.Layout.Hidden
 import XMonad.Layout.NoBorders
+import XMonad.Layout.Renamed
 
 import XMonad.Prompt
 import XMonad.Prompt.FuzzyMatch
@@ -70,18 +71,22 @@ myGSconfig = def
              , gs_cellheight = 40
              }
 
+myManageHook = composeAll
+     [ title =? "Media viewer" <&&> className =? "TelegramDesktop" --> doFloat
+     ]
+
 main = do
     xmproc <- spawnPipe "xmobar"
     xmonad $ ewmh $ docks def
         { handleEventHook = handleEventHook def <+> fullscreenEventHook
-        , layoutHook = avoidStruts $ smartBorders $ hiddenWindows $ layoutHook def
+        , layoutHook = renamed [CutWordsLeft 1] $ avoidStruts $ smartBorders $ hiddenWindows $ layoutHook def
         , logHook = dynamicLogWithPP xmobarPP
                         { ppOutput = hPutStrLn xmproc
                         , ppTitle = xmobarColor blue "" . shorten 80
                         , ppCurrent = xmobarColor yellow "" . wrap "[" "]"
                         , ppUrgent  = xmobarColor red yellow
                         }
-        , manageHook = manageHook def <+> scratchpadManageHookDefault
+        , manageHook = myManageHook <+> manageHook def <+> scratchpadManageHookDefault
         , startupHook  = addEWMHFullscreen
         , modMask = mod4Mask
         , normalBorderColor  = grey
