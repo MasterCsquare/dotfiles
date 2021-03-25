@@ -12,7 +12,9 @@ import XMonad.Layout.Hidden
 import XMonad.Layout.NoBorders
 
 import XMonad.Prompt
+import XMonad.Prompt.FuzzyMatch
 import XMonad.Prompt.Shell
+import XMonad.Prompt.Window
 
 import XMonad.Util.EZConfig
 import XMonad.Util.Run
@@ -58,7 +60,8 @@ myXPConfig = def
              , alwaysHighlight = True
              , height = 32
              , font = myFont
-             , searchPredicate = isInfixOf
+             , searchPredicate = fuzzyMatch
+             , sorter = fuzzySort
              }
 
 myGSconfig = def
