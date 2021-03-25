@@ -10,6 +10,7 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
 
 import XMonad.Layout.Hidden
+import XMonad.Layout.Maximize
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Renamed
 
@@ -78,11 +79,18 @@ myManageHook = composeAll
      , isDialog --> doRectFloat (RationalRect (1%4) (1%4) (1%2) (1%2))
      ]
 
+myLayout = renamed [CutWordsLeft 2]
+           $ avoidStruts
+           $ smartBorders
+           $ maximize
+           $ hiddenWindows
+           $ layoutHook def
+
 main = do
     xmproc <- spawnPipe "xmobar"
     xmonad $ ewmh $ docks def
         { handleEventHook = handleEventHook def <+> fullscreenEventHook
-        , layoutHook = renamed [CutWordsLeft 1] $ avoidStruts $ smartBorders $ hiddenWindows $ layoutHook def
+        , layoutHook = myLayout
         , logHook = dynamicLogWithPP xmobarPP
                         { ppOutput = hPutStrLn xmproc
                         , ppTitle = xmobarColor blue "" . shorten 80
@@ -111,4 +119,5 @@ main = do
         , ("M-S-<Return>", windows swapMaster)
         , ("M-d", withFocused hideWindow)
         , ("M-a", popOldestHiddenWindow)
+        , ("M-v", withFocused (sendMessage . maximizeRestore))
         ]
