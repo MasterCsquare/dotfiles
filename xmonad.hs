@@ -1,5 +1,5 @@
 import XMonad
-import qualified XMonad.StackSet as W
+import XMonad.StackSet
 
 import XMonad.Actions.GridSelect
 import XMonad.Actions.WindowGo
@@ -7,6 +7,7 @@ import XMonad.Actions.WindowGo
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.ManageHelpers
 
 import XMonad.Layout.Hidden
 import XMonad.Layout.NoBorders
@@ -24,6 +25,7 @@ import XMonad.Util.Scratchpad
 import Control.Monad
 import Data.Maybe
 import Data.List
+import Data.Ratio
 import System.IO
 
 yellow = "#ebbf83"
@@ -73,6 +75,7 @@ myGSconfig = def
 
 myManageHook = composeAll
      [ title =? "Media viewer" <&&> className =? "TelegramDesktop" --> doFloat
+     , isDialog --> doRectFloat (RationalRect (1%4) (1%4) (1%2) (1%2))
      ]
 
 main = do
@@ -105,7 +108,7 @@ main = do
         , ("M-b", sendMessage ToggleStruts)
         , ("M-c", kill)
         , ("M-<Return>", spawn "kitty")
-        , ("M-S-<Return>", windows W.swapMaster)
+        , ("M-S-<Return>", windows swapMaster)
         , ("M-d", withFocused hideWindow)
         , ("M-a", popOldestHiddenWindow)
         ]
