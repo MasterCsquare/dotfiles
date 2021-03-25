@@ -1,6 +1,7 @@
 import XMonad
 import XMonad.StackSet
 
+import XMonad.Actions.CycleWS
 import XMonad.Actions.GridSelect
 import XMonad.Actions.WindowGo
 
@@ -8,6 +9,7 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
+import XMonad.Hooks.ScreenCorners
 
 import XMonad.Layout.Hidden
 import XMonad.Layout.Maximize
@@ -84,12 +86,21 @@ myLayout = renamed [CutWordsLeft 2]
            $ smartBorders
            $ maximize
            $ hiddenWindows
+           $ screenCornerLayoutHook
            $ layoutHook def
+
+myStartupHook = do
+  addScreenCorners [ (SCUpperRight, nextWS)
+                   , (SCUpperLeft,  prevWS)
+                   ]
+
+myEventHook e = do
+  screenCornerEventHook e
 
 main = do
     xmproc <- spawnPipe "xmobar"
     xmonad $ ewmh $ docks def
-        { handleEventHook = handleEventHook def <+> fullscreenEventHook
+        { handleEventHook = handleEventHook def <+> fullscreenEventHook <+> myEventHook
         , layoutHook = myLayout
         , logHook = dynamicLogWithPP xmobarPP
                         { ppOutput = hPutStrLn xmproc
@@ -98,7 +109,7 @@ main = do
                         , ppUrgent  = xmobarColor red yellow
                         }
         , manageHook = myManageHook <+> manageHook def <+> scratchpadManageHookDefault
-        , startupHook = addEWMHFullscreen
+        , startupHook = myStartupHook <+> addEWMHFullscreen
         , modMask = mod4Mask
         , normalBorderColor  = grey
         , focusedBorderColor = red
