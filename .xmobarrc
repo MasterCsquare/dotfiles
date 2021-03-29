@@ -2,7 +2,7 @@ Config { font = "xft:Dejavu Sans Mono:size=11,WenQuanYi Zen Hei:size=11"
        , bgColor = "#0a0e14"
        , fgColor = "#b3b1ad"
        , position = Top
-       , commands = [ Run Cpu ["-t", " Cpu: <total>%"] 10
+       , commands = [ Run Cpu ["-t", " Cpu: <total>% "] 10
                     , Run Memory ["-t"," Mem: <usedratio>% "] 10
                     , Run Date " %a %b %_d %l:%M " "date" 10
                     , Run  DiskU [("/", " <used>/<size> ")]
