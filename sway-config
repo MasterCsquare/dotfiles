@@ -17,7 +17,7 @@ output HDMI-A-1 resolution 1920x1080 position 0,0
 
 # starup
 exec {
-     ibus-daemon -drx
+     fcitx5
 }
 
 # borders and gaps
