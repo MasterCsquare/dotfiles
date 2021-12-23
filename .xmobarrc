@@ -8,7 +8,7 @@ Config { font = "xft:Dejavu Sans Mono:size=11,WenQuanYi Zen Hei:size=11"
                     , Run  DiskU [("/", " <used>/<size> ")]
                       ["-L", "20", "-H", "50", "-m", "1", "-p", "3"]
                       20
-                    , Run ThermalZone 0 ["-t"," <temp>C "] 30
+                    , Run ThermalZone 0 ["-t"," <temp>℃ "] 30
                     , Run StdinReader
                     ]
        , sepChar = "%"
