@@ -108,7 +108,7 @@ main = do
                         , ppCurrent = xmobarColor yellow "" . wrap "[" "]"
                         , ppUrgent  = xmobarColor red yellow
                         }
-        , manageHook = myManageHook <+> manageHook def <+> scratchpadManageHookDefault
+        , manageHook = myManageHook <+> manageHook def <+> scratchpadManageHook (RationalRect 0.2 0.2 0.6 0.6)
         , startupHook = myStartupHook <+> addEWMHFullscreen
         , modMask = mod4Mask
         , normalBorderColor  = grey
