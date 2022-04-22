@@ -7,7 +7,7 @@ export QT_QPA_PLATFORMTHEME=qt5ct
 eval "$(dbus-launch --sh-syntax --exit-with-session)"
 fcitx5&
 #setxkbmap -option caps:menu&
-xrandr --output eDP --off --output HDMI-A-0 --auto&
+xrandr --output eDP --off --output HDMI-A-0 --primary --auto&
 xsetroot -cursor_name left_ptr
 xbacklight -set 40
 exec xmonad
