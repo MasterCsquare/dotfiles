@@ -9,5 +9,4 @@ source $ZSH/oh-my-zsh.sh
 alias s="sudo "
 alias m="mpv"
 alias x="startx"
-alias reboot="loginctl reboot"
-alias poweroff="loginctl poweroff"
+alias l="lem --frontend-ncurse"
