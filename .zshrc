@@ -9,4 +9,4 @@ source $ZSH/oh-my-zsh.sh
 alias s="sudo "
 alias m="mpv"
 alias x="startx"
-alias l="lem --frontend-ncurse"
+alias icat="kitty +kitten icat"
