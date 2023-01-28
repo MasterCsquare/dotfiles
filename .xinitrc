@@ -1,13 +1,17 @@
-export GTK_IM_MODULE=fcitx5
-export QT_IM_MODULE=fcitx5
-export XMODIFIERS=@im=fcitx5
+# -*- mode:posix-shell -*-
+export GTK_IM_MODULE=ibus
+export QT_IM_MODULE=ibus
+export XMODIFIERS=@im=ibus
+export GLFW_IM_MODULE=ibus
 
-export QT_QPA_PLATFORMTHEME=qt5ct
+#export QT_QPA_PLATFORMTHEME=qt5ct
 
 eval "$(dbus-launch --sh-syntax --exit-with-session)"
-fcitx5&
-#setxkbmap -option caps:menu&
-xrandr --output eDP --off --output HDMI-A-0 --primary --auto&
+ibus-daemon -d
+setxkbmap -option caps:menu
+#xrandr --output eDP --off --output HDMI-A-0 --primary --auto
 xsetroot -cursor_name left_ptr
-xbacklight -set 40
+xbacklight -set 30
+#pulseaudio -D
+#feh --bg-scale ~/wallpaper.jpg
 exec xmonad
