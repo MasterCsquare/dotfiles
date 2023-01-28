@@ -1,17 +1,19 @@
-Config { font = "xft:Dejavu Sans Mono:size=11,WenQuanYi Zen Hei:size=11"
+-- -*- mode:haskell -*-
+Config { font = "xft:Dejavu Sans Mono:size=11, Wen Quan Yi Zen hei:size=11"
        , bgColor = "#0a0e14"
        , fgColor = "#b3b1ad"
        , position = Top
        , commands = [ Run Cpu ["-t", " Cpu: <total>% "] 10
                     , Run Memory ["-t"," Mem: <usedratio>% "] 10
-                    , Run Date " %a %b %_d %l:%M " "date" 10
+                    , Run Date " %a %b %_d %H:%M " "date" 10
                     , Run  DiskU [("/", " <used>/<size> ")]
                       ["-L", "20", "-H", "50", "-m", "1", "-p", "3"]
-                      20
-                    , Run ThermalZone 0 ["-t"," <temp>℃ "] 30
+                      10
+                    , Run ThermalZone 0 ["-t"," <temp> "] 10
+                    , Run Battery ["-t", " <acstatus> <left>% "] 10
                     , Run StdinReader
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% }{<fc=#0a0e14,#39bae6>%cpu%</fc><fc=#0a0e14,#95e6cb>%memory%</fc><fc=#0a0e14,#99bb66>%disku%</fc><fc=#0a0e14,#ff6655>%thermal0%</fc><fc=#0a0e14,#eebb88>%date%</fc>"
-       }
+       , template = "%StdinReader% }{<fc=#0a0e14,#39bae6>%cpu%</fc><fc=#0a0e14,#95e6cb>%memory%</fc><fc=#0a0e14,#99bb66>%disku%</fc><fc=#0a0e14,#8bd49c>%battery%</fc><fc=#0a0e14,#ff6655>%thermal0%</fc><fc=#0a0e14,#eebb88>%date%</fc>"
+}
