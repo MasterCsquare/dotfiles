@@ -90,8 +90,8 @@ myLayout = renamed [CutWordsLeft 2]
            $ layoutHook def
 
 myStartupHook = do
-  addScreenCorners [ (SCUpperRight,  moveTo Next NonEmptyWS)
-                   , (SCUpperLeft,   moveTo Prev NonEmptyWS)
+  addScreenCorners [ (SCUpperRight,  moveTo Next $ Not emptyWS)
+                   , (SCUpperLeft,   moveTo Prev $ Not emptyWS)
                    ]
 
 myEventHook e = do
