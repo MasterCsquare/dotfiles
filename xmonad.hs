@@ -38,7 +38,7 @@ grey = "#384551"
 black = "#0a0e14"
 white = "#b3b1ad"
 
-myFont = "xft:Dejavu Sans Mono:size=11"
+myFont = "xft:DejaVu Sans Mono:size=11"
 
 addNETSupported :: Atom -> X ()
 addNETSupported x   = withDisplay $ \dpy -> do
