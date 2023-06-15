@@ -23,7 +23,7 @@ import XMonad.Prompt.Window
 
 import XMonad.Util.EZConfig
 import XMonad.Util.Run
-import XMonad.Util.Scratchpad
+import XMonad.Util.NamedScratchpad
 
 import Control.Monad
 import Data.Maybe
@@ -97,6 +97,12 @@ myStartupHook = do
 myEventHook e = do
   screenCornerEventHook e
 
+scratchpads :: [NamedScratchpad]
+scratchpads = [
+    NS "term" "kitty --name scratchpad" (resource =? "scratchpad")
+        (customFloating $ RationalRect 0.2 0.2 0.6 0.6)
+  ]
+
 main = do
     xmproc <- spawnPipe "xmobar"
     xmonad $ ewmh $ docks def
@@ -108,7 +114,7 @@ main = do
                         , ppCurrent = xmobarColor yellow "" . wrap "[" "]"
                         , ppUrgent  = xmobarColor red yellow
                         }
-        , manageHook = myManageHook <+> manageHook def <+> scratchpadManageHook (RationalRect 0.2 0.2 0.6 0.6)
+        , manageHook = myManageHook <+> manageHook def <+> namedScratchpadManageHook scratchpads
         , startupHook = myStartupHook <+> addEWMHFullscreen
         , modMask = mod4Mask
         , normalBorderColor  = grey
@@ -117,14 +123,14 @@ main = do
         } `additionalKeysP`
         [ ("S-<Print>", spawn "maim -s ~/$(date +%s).png")
         , ("<Print>", spawn "maim ~/$(date +%s).png")
-        , ("M-<Page_Up>", spawn "amixer set Master 3%+")
-        , ("M-<Page_Down>", spawn "amixer set Master 3%-")
+        , ("M-]", spawn "amixer set Master 3%+")
+        , ("M-[", spawn "amixer set Master 3%-")
         , ("M-p", shellPrompt myXPConfig)
         , ("M-g", goToSelected myGSconfig)
         , ("M-b", bringSelected myGSconfig)
         , ("M-i", runOrRaise "emacs" (className =? "Emacs"))
         , ("M-f", runOrRaise "firefox" (className =? "firefox"))
-        , ("M-s", scratchpadSpawnActionCustom "kitty --name=scratchpad")
+        , ("M-s", namedScratchpadAction scratchpads "term")
         , ("M-c", kill)
         , ("M-<Return>", spawn "kitty")
         , ("M-S-<Return>", windows swapMaster)
