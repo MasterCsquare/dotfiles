@@ -1,10 +1,10 @@
 {
-    "height": 20,
-    "modules-left": ["sway/workspaces", "sway/mode",],
-    "modules-center": ["sway/window"],
+    "height": 18,
+    "modules-left": ["niri/workspaces"],
+    "modules-center": ["niri/window"],
     "modules-right": ["mpd", "idle_inhibitor", "pulseaudio", "network", "cpu", "memory", "temperature", "backlight", "battery", "battery#bat2", "clock", "tray"],
-    "sway/mode": {
-        "format": "<span style=\"italic\">{}</span>"
+    "niri/workspaces": {
+	"format": "{index}"
     },
     "mpd": {
         "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ ",
@@ -100,5 +100,5 @@
             "default": ["", "", ""]
         },
         "on-click": "pavucontrol"
-    },
+    }
 }
